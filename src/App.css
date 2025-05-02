@@ -1,42 +1,58 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Make sure html & body are 100% */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Main screen wrapper */
+.screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #6FB1C5;
+  overflow: hidden;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Icons stacked vertically */
+.desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 40px; /* leave room for taskbar */
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Taskbar at bottom */
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #c0c0c0;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  border-top: 2px solid white;
+  box-shadow: inset 0 1px 0 #808080;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
 }
 
-.card {
-  padding: 2em;
+
+.spacer {
+  flex: 1;
 }
 
-.read-the-docs {
-  color: #888;
+.date_and_time {
+  color: #333;
+  text-align: right;
+  white-space: nowrap;
 }
