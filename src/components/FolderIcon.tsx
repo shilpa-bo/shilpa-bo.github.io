@@ -3,13 +3,14 @@ import Draggable from 'react-draggable';
 
 type Props = {
     label: string;
+    onDoubleClick?: () => void;
   };
   
   
-  export default function FolderIcon({ label }: Props) {
+  export default function FolderIcon({ label, onDoubleClick}: Props) {
     return (
         <>
-        <div style={{ 
+        <div onDoubleClick={onDoubleClick}  style={{ 
             textAlign: 'center',
             cursor: 'pointer',
             alignItems: 'center',
@@ -33,7 +34,7 @@ type Props = {
                     }}>{label}
                 </p>
         </div>
-        
+
         
         </>
     );
