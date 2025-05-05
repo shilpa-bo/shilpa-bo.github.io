@@ -18,7 +18,7 @@ html, body, #root {
 
 /* Icons stacked vertically */
 .desktop {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   bottom: 40px; /* leave room for taskbar */
@@ -26,6 +26,9 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+#icon-projects{
+  position: absolute;
 }
 
 /* Taskbar at bottom */

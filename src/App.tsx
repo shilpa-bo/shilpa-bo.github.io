@@ -50,9 +50,9 @@ function App() {
   return (
     <div className="screen">
       <div className="desktop">
-        <FolderIcon label="projects" onDoubleClick={() => handleOpenWindow('projects')}/>
-        <DocumentIcon label="experience" onDoubleClick={() => handleOpenWindow('experience')}/>
-        <ImageIcon label="about me" onDoubleClick={() => handleOpenWindow('about-me')}/>
+        <FolderIcon label="projects" onDoubleClick={() => handleOpenWindow('projects')} top={40} left={36}/>
+        <DocumentIcon label="experience" onDoubleClick={() => handleOpenWindow('experience')} top={160} left={40}/>
+        <ImageIcon label="about me" onDoubleClick={() => handleOpenWindow('about-me')} top={280} left={45}/>
 
         {openWindows.map((win, index) => {
           const offsetStyle = {
@@ -63,7 +63,7 @@ function App() {
           };
 
           return (
-            <div key={win.id} style={offsetStyle} onMouseDown={() => bringToFront(win.id)}>
+            <div key={win.id} id={`${win.id}-window`} style={offsetStyle} onMouseDown={() => bringToFront(win.id)}>
               {windowComponents[win.id]}
             </div>
           );

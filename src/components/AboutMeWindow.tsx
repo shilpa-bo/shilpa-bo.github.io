@@ -1,6 +1,8 @@
 import WindowWrapper from "./WindowWrapper";
+import useDragger from "../hooks/useDragger";
 
 export default function AboutMeWindow({ onClose }: { onClose: () => void }) {
+  useDragger("about-me-window");
   return (
     <WindowWrapper title="About me" onClose={onClose}>
         <div className="about-me">

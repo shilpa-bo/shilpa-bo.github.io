@@ -1,9 +1,11 @@
 type Props = {
     label: string;
-    onDoubleClick?: () => void
+    onDoubleClick?: () => void;
+    top: number;
+    left: number;
   };
   
-  export default function FolderIcon({ label, onDoubleClick }: Props) {
+  export default function FolderIcon({ label, onDoubleClick, top, left }: Props) {
     return (
         <>
         
@@ -13,7 +15,9 @@ type Props = {
             alignItems: 'center',
             display: 'flex',
             flexDirection: 'column',
-            
+            position: 'absolute',
+            top: `${top}px`,
+            left: `${left}px`
             }}>
             <img
                     src="/notepad_icon.png"

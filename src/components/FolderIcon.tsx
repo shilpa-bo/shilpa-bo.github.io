@@ -1,22 +1,25 @@
-import Draggable from 'react-draggable';
 
 
 type Props = {
     label: string;
     onDoubleClick?: () => void;
+    top: number;
+    left: number;
   };
   
   
-  export default function FolderIcon({ label, onDoubleClick}: Props) {
+  export default function FolderIcon({ label, onDoubleClick, top, left}: Props) {
     return (
         <>
-        <div onDoubleClick={onDoubleClick}  style={{ 
+        <div  onDoubleClick={onDoubleClick}  style={{ 
+            position: 'absolute',
+            top: `${top}px`,
+            left: `${left}px`,
             textAlign: 'center',
             cursor: 'pointer',
             alignItems: 'center',
             display: 'flex',
             flexDirection: 'column',
-            
             }}>
             <img
                     src="/files_icon.png"
