@@ -30,7 +30,7 @@ function useResizable(id: string, resizeSelector: string = '.resize-handle') : v
             coords.current.lastHeight = target.offsetHeight;
         };
         
-        const onMouseUp = (e: MouseEvent) => {
+        const onMouseUp = () => {
             isResizing.current = false;
         };
     
