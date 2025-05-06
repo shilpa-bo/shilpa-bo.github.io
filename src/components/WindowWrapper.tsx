@@ -18,8 +18,9 @@ export default function WindowWrapper({ id, title, onClose, onMinimize, children
     <div id={id} className="mini-window">
       <div className="titlebar">
         <span>{title}</span>
-        <span>
-        <button onClick={onMinimize}>-</button> <button onClick={onClose}>X</button>
+        <span className="window-controls">
+            <button className='minimize' onClick={onMinimize}><span className="symbol">–</span></button> 
+            <button className='close' onClick={onClose}><span className="symbol">x</span></button>
         </span>
       </div>
 

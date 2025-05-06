@@ -1,27 +1,40 @@
   .mini-window {
     position: absolute;
-    background-color: aliceblue;
+    background-color: rgb(208, 221, 232);
     border: 2px solid #000;
-    overflow: auto;
-    width: auto;
-    height: auto;
+    width: 500px;
+    height: 500px;
     box-sizing: border-box;
     resize: none;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 0; 
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    
   }
   
   .titlebar {
-    background: #ddd;
+    background-color: #2E6374;
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
     padding: 4px 8px;
-    cursor: move;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: bold;
-    user-select: none;
-  }
+    border-bottom: 2px solid #D3D3D3;
+    margin: 0; /* ensure no default margins */
   
+  }
+    
   .window-content {
-    padding: 1rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 2rem;
+    overflow: auto;
+    flex: 1 1 auto; 
   }
   
   .resize-handle {
@@ -35,4 +48,54 @@
     clip-path: polygon(100% 0, 0 100%, 100% 100%); /* bottom-right triangle */
     z-index: 10;
   }
+
+  .window-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* clean spacing between buttons */
+  }
+
+  .minimize {
+    cursor: pointer;
+    background-color: #D1C291;
+    border-radius: 50%;
+    border: none;
+    position: relative;
+    transition: background-color 0.2s ease;
+    align-items: center;
+    overflow: hidden;  
+  }
+  .minimize .symbol {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    font-size: 14px;
+    line-height: 0;
+    color: black;
+    pointer-events: none;
+  }
+  .minimize:hover .symbol {
+    opacity: 1;
+  }
+  .close {
+    cursor: pointer;
+    background-color: #D19191;
+    border-radius: 50%;
+    border: none;
+    position: relative;
+    transition: background-color 0.2s ease;
+    align-items: center;
+    overflow: hidden;  
+  }
+  .close .symbol {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    font-size: 14px;
+    line-height: 0;
+    color: black;
+    pointer-events: none;
+  }
+  .close:hover .symbol {
+    opacity: 1;
+  }
+
   

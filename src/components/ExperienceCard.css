@@ -1,0 +1,44 @@
+.experience-card {
+    background-color: #EBF2F4;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  
+  .job-title{
+    color: #2E6374;
+    font-weight: 20;
+  }
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-row h2 {
+    color: #2E6374;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  .date {
+    background-color: rgba(111, 177, 197, 0.50);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: black;
+  }
+  .company {
+    font-size: small;
+    color: #000;
+  }
+  
+  ul {
+    padding-left: 1.2rem;
+    color: #333;
+    line-height: 1.6;
+  }
+  

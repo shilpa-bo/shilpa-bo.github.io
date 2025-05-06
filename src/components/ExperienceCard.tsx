@@ -1,3 +1,5 @@
+import "./ExperienceCard.css";
+
 type Props = {
     title: string;
     company: string;
@@ -8,7 +10,7 @@ type Props = {
   export default function ExperienceCard({ title, company, bullets, dateRange }: Props) {
     return (
       <div className="experience-card">
-        <div className="card-header">
+        <div className="header-row">
           <h2 className="job-title">{title}</h2>
           <span className="date">{dateRange}</span>
         </div>

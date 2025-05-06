@@ -1,4 +1,3 @@
-import useDragger from '../hooks/useDragger';
 import WindowWrapper from './WindowWrapper';
 
 
