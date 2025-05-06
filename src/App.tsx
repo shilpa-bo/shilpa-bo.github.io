@@ -18,7 +18,15 @@ function App() {
     minimized: boolean;
   }
   const dateTime = useDateTime();
-  const [openWindows, setOpenWindows] = useState<WindowEntry[]>([]);
+  const [openWindows, setOpenWindows] = useState<WindowEntry[]>([
+    {
+      id: 'about-me',
+      z: 1,
+      top: 100,
+      left: 500,
+      minimized: false,
+    },  
+  ]);
   const [zCounter, setZCounter] = useState(0);
   
   const handleOpenWindow = (windowName: string) => {
