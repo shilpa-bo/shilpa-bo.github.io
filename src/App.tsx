@@ -13,23 +13,62 @@ function App() {
   type WindowEntry = {
     id: string;
     z: number;
+    top: number;
+    left: number;
+    minimized: boolean;
   }
   const dateTime = useDateTime();
   const [openWindows, setOpenWindows] = useState<WindowEntry[]>([]);
   const [zCounter, setZCounter] = useState(0);
-
+  
   const handleOpenWindow = (windowName: string) => {
-    console.log("handleOpenWindow", windowName);
-    if (!openWindows.some(w => w.id === windowName)) {
-      setZCounter(zCounter + 1);
-      setOpenWindows([...openWindows, { id: windowName, z: zCounter }]);
+    const existing = openWindows.find(w => w.id === windowName);
+
+    if (existing) {
+      if (existing.minimized) {
+        // Restore it (toggle minimized = false)
+        setOpenWindows(windows =>
+          windows.map(w =>
+            w.id === windowName ? { ...w, minimized: false } : w
+          )
+        );
+      } else {
+        // Or: bring to front if it's already open
+        bringToFront(windowName);
+      }
+    }
+    else{
+      // First time opening window
+      const newZ = zCounter + 1;
+      const offset = openWindows.length * 30;
+
+      setOpenWindows([
+        ...openWindows,
+        {
+          id: windowName,
+          z: newZ,
+          top: 100 + offset,
+          left: 100 + offset,
+          minimized: false,
+        }
+      ]);
+      setZCounter(newZ);
     }
   };
-
+  
   const closeWindow = (windowName: string) => {
     setOpenWindows(openWindows.filter(w => w.id !== windowName));
   };
 
+  const toggleMinimizeWindow = (windowName: string) => {
+    console.log("toggleMinimizeWindow", windowName);
+    setOpenWindows(current =>
+      current.map(w =>
+        w.id === windowName ? { ...w, minimized: !w.minimized } : w
+      )
+    );
+  };
+  
   const bringToFront = (windowName: string) => {
     console.log("bringToFront", windowName);
     setOpenWindows(openWindows.map(w => {
@@ -42,9 +81,9 @@ function App() {
   };
 
   const windowComponents: { [key: string]: JSX.Element } = {
-    'experience': <ExperienceWindow onClose={() => closeWindow('experience')} />,
-    'projects': <ProjectsWindow onClose={() => closeWindow('projects')} />,
-    'about-me': <AboutMeWindow onClose={() => closeWindow('about-me')} />,
+    'experience': <ExperienceWindow onMinimize={() => toggleMinimizeWindow('experience')} onClose={() => closeWindow('experience')} />,
+    'projects': <ProjectsWindow onMinimize={() => toggleMinimizeWindow('projects')} onClose={() => closeWindow('projects')} />,
+    'about-me': <AboutMeWindow onMinimize={() => toggleMinimizeWindow('about-me')} onClose={() => closeWindow('about-me')} />,
   };
   
   return (
@@ -54,16 +93,19 @@ function App() {
         <DocumentIcon label="experience" onDoubleClick={() => handleOpenWindow('experience')} top={160} left={40}/>
         <ImageIcon label="about me" onDoubleClick={() => handleOpenWindow('about-me')} top={280} left={45}/>
 
-        {openWindows.map((win, index) => {
+        {openWindows.map((win) => {
           const offsetStyle = {
-            top: `${100 + index * 30}px`,
-            left: `${100 + index * 30}px`,
+            top: `${win.top}px`,
+            left: `${win.left}px`,
             position: 'absolute' as const,
             zIndex: win.z,
           };
 
+          // Only render the window if it's NOT minimized
+          if (win.minimized) return null; 
+
           return (
-            <div key={win.id} id={`${win.id}-window`} style={offsetStyle} onMouseDown={() => bringToFront(win.id)}>
+            <div key={win.id} id={`${win.id}`} style={offsetStyle} onMouseDown={() => bringToFront(win.id)}>
               {windowComponents[win.id]}
             </div>
           );
@@ -77,8 +119,18 @@ function App() {
                 <button
                 key={win.id}
                 className="taskbar-button"
-                onClick={() => {
-                  // Optional: toggle focus, or bring to front later
+                onClick={() => {                  
+                  // If window is minimized, restore it
+                  if (win.minimized) {
+                    setOpenWindows(windows =>
+                      windows.map(w =>
+                        w.id === win.id ? { ...w, minimized: false } : w
+                      )
+                    );            
+                  }
+                  else{ //if window is already open, bring to front
+                    bringToFront(win.id);
+                  }
                 }}
               >
                 {win.id}

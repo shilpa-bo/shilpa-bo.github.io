@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 
-function useDragger(id: string) : void{
+function useDragger(id: string, dragSelector: string = '.titlebar') : void{
     const isClicked = useRef<boolean>(false);
     
     const coords = useRef<{
@@ -20,8 +20,9 @@ useEffect(() => {
     const target = document.getElementById(id)
     if (!target) throw new Error("Element with given id doesn't exist.");
 
-    const container = target.parentElement
-    if(!container) throw new Error("Element with given id doesn't exist.");
+    const dragHandle = target.querySelector(dragSelector) as HTMLElement | null;;
+    if (!dragHandle) throw new Error(`Drag handle "${dragSelector}" not found inside "${id}"`);
+
 
     const onMouseDown = (e: MouseEvent) => {
         isClicked.current = true;
@@ -45,20 +46,18 @@ useEffect(() => {
         target.style.left = `${nextX}px`;
     };
 
-    target.addEventListener('mousedown', onMouseDown);
-    target.addEventListener('mouseup', onMouseUp);
-    container.addEventListener('mousemove', onMouseMove);
-    container.addEventListener('mouseleave', onMouseUp);
+    dragHandle.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mousemove', onMouseMove);
 
     const cleanup = () => {
-        target.removeEventListener('mousedown', onMouseDown);
-        target.removeEventListener('mouseup', onMouseUp);
-        container.removeEventListener('mousemove', onMouseMove);
-        container.removeEventListener('mouseleave', onMouseUp);
+        dragHandle.removeEventListener('mousedown', onMouseDown);
+        document.removeEventListener('mouseup', onMouseUp);
+        document.removeEventListener('mousemove', onMouseMove);
       };
 
     return cleanup;
-}, [id]);
+}, [id, dragSelector]);
 
 }
 

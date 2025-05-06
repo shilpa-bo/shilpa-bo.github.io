@@ -3,11 +3,9 @@ import ExperienceCard from './ExperienceCard';
 import useDragger from '../hooks/useDragger';
 
 
-export default function ExperienceWindow({ onClose }: { onClose: () => void }) {
-  useDragger("experience-window");
-  
+export default function ExperienceWindow({ onMinimize, onClose }: { onMinimize: () => void, onClose: () => void }) {  
   return (
-    <WindowWrapper title="Experience" onClose={onClose}>
+    <WindowWrapper id= "experience-window" title="Experience" onMinimize={onMinimize} onClose={onClose}>
       <div className="experience-wrapper">
         <h1 className="experience-title">WORK EXPERIENCE</h1>
 

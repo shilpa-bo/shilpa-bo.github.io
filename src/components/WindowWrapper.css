@@ -1,0 +1,38 @@
+  .mini-window {
+    position: absolute;
+    background-color: aliceblue;
+    border: 2px solid #000;
+    overflow: auto;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    resize: none;
+  }
+  
+  .titlebar {
+    background: #ddd;
+    padding: 4px 8px;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    user-select: none;
+  }
+  
+  .window-content {
+    padding: 1rem;
+  }
+  
+  .resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background-color: #888;
+    cursor: nwse-resize;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%); /* bottom-right triangle */
+    z-index: 10;
+  }
+  
