@@ -2,9 +2,9 @@ import WindowWrapper from './WindowWrapper';
 import ExperienceCard from './ExperienceCard';
 
 
-export default function ExperienceWindow({ onMinimize, onClose }: { onMinimize: () => void, onClose: () => void }) {  
+export default function ExperienceWindow({onMaximize, onMinimize, onClose }: { onMaximize: () => void, onMinimize: () => void, onClose: () => void }) {  
   return (
-      <WindowWrapper id="experience-window" title="Experience" onMinimize={onMinimize} onClose={onClose}>
+      <WindowWrapper id="experience-window" title="Experience" onMaximize={onMaximize} onMinimize={onMinimize} onClose={onClose}>
         <div
           className="experience-content-wrapper"
         >

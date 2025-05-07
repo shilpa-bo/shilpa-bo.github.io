@@ -7,7 +7,7 @@ import ExperienceWindow from './components/ExperiencesWindow';
 import { JSX, useState } from 'react';
 import ProjectsWindow from './components/ProjectsWindow';
 import AboutMeWindow from './components/AboutMeWindow';
-
+import PixelCanvas from './components/PixelCanvas';
 
 function App() {
   type WindowEntry = {
@@ -16,6 +16,7 @@ function App() {
     top: number;
     left: number;
     minimized: boolean;
+    maximized: boolean;
   }
   const dateTime = useDateTime();
   const [openWindows, setOpenWindows] = useState<WindowEntry[]>([
@@ -25,6 +26,7 @@ function App() {
       top: 100,
       left: 500,
       minimized: false,
+      maximized: false
     },  
   ]);
   const [zCounter, setZCounter] = useState(0);
@@ -58,6 +60,7 @@ function App() {
           top: 100 + offset,
           left: 100 + offset,
           minimized: false,
+          maximized: false
         }
       ]);
       setZCounter(newZ);
@@ -76,6 +79,15 @@ function App() {
       )
     );
   };
+
+  const toggleMaximizeWindow = (windowName: string) => {
+    console.log("toggleMaximizeWindow", windowName);
+    setOpenWindows(current =>
+      current.map(w =>
+        w.id === windowName ? { ...w, maximized: !w.maximized } : w
+      )
+    );
+  }
   
   const bringToFront = (windowName: string) => {
     console.log("bringToFront", windowName);
@@ -89,13 +101,15 @@ function App() {
   };
 
   const windowComponents: { [key: string]: JSX.Element } = {
-    'experience': <ExperienceWindow onMinimize={() => toggleMinimizeWindow('experience')} onClose={() => closeWindow('experience')} />,
-    'projects': <ProjectsWindow onMinimize={() => toggleMinimizeWindow('projects')} onClose={() => closeWindow('projects')} />,
-    'about-me': <AboutMeWindow onMinimize={() => toggleMinimizeWindow('about-me')} onClose={() => closeWindow('about-me')} />,
+    'experience': <ExperienceWindow onMaximize={() => toggleMaximizeWindow('experience')} onMinimize={() => toggleMinimizeWindow('experience')} onClose={() => closeWindow('experience')} />,
+    'projects': <ProjectsWindow onMaximize={() => toggleMaximizeWindow('projects')} onMinimize={() => toggleMinimizeWindow('projects')} onClose={() => closeWindow('projects')} />,
+    'about-me': <AboutMeWindow onMaximize={() => toggleMaximizeWindow('about-me')} onMinimize={() => toggleMinimizeWindow('about-me')} onClose={() => closeWindow('about-me')} />,
   };
   
   return (
-    <div className="screen">
+    <>
+      <PixelCanvas />
+        <div className="screen" >
       <div className="desktop">
         <FolderIcon label="projects" onDoubleClick={() => handleOpenWindow('projects')} top={40} left={36}/>
         <DocumentIcon label="experience" onDoubleClick={() => handleOpenWindow('experience')} top={160} left={40}/>
@@ -104,7 +118,7 @@ function App() {
         {openWindows.map((win) => {
           const offsetStyle = {
             top: `${win.top}px`,
-            left: `${win.left}px`,
+            left:  `${win.left}px`,
             position: 'absolute' as const,
             zIndex: win.z,
           };
@@ -149,6 +163,8 @@ function App() {
         <div className="date_and_time">{dateTime}</div>
       </div>
     </div>
+
+    </>
   );
   }
 

@@ -8,10 +8,11 @@ type Props = {
   title: string;
   onClose: () => void;
   onMinimize: () => void;
+  onMaximize: () => void;
   children: React.ReactNode;
 };
 
-export default function WindowWrapper({ id, title, onClose, onMinimize, children }: Props) {
+export default function WindowWrapper({ id, title, onClose, onMinimize, onMaximize, children }: Props) {
     useDragger(id);
     useResizable(id);
   return (
@@ -19,6 +20,7 @@ export default function WindowWrapper({ id, title, onClose, onMinimize, children
       <div className="titlebar">
         <span>{title}</span>
         <span className="window-controls">
+            <button className='maximize' onClick={onMaximize}><span className="symbol">+</span></button> 
             <button className='minimize' onClick={onMinimize}><span className="symbol">–</span></button> 
             <button className='close' onClick={onClose}><span className="symbol">x</span></button>
         </span>

@@ -2,8 +2,6 @@
     position: absolute;
     background-color: rgb(208, 221, 232);
     border: 2px solid #000;
-    width: 500px;
-    height: 500px;
     box-sizing: border-box;
     resize: none;
     font-family: 'IBM Plex Mono', monospace;
@@ -12,8 +10,8 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-
-    
+    width: 500px;
+    height: 400px;
   }
   
   .titlebar {
@@ -98,4 +96,24 @@
     opacity: 1;
   }
 
-  
+  .maximize {
+    cursor: pointer;
+    background-color: #97D191;
+    border-radius: 50%;
+    border: none;
+    position: relative;
+    transition: background-color 0.2s ease;
+    align-items: center;
+    overflow: hidden;  
+  }
+  .maximize .symbol {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    font-size: 14px;
+    line-height: 0;
+    color: black;
+    pointer-events: none;
+  }
+  .maximize:hover .symbol {
+    opacity: 1;
+  }

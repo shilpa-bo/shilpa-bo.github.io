@@ -28,6 +28,7 @@ type Props = {
                     fontFamily: "'VT323', monospace",
                     color: 'black', 
                     fontSize: '0.8rem', 
+                    backgroundColor: '#EEF44D',
                     margin: '0',
                     marginTop: '1px',
                     marginBottom: '10px'

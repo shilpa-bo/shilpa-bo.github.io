@@ -29,6 +29,7 @@ type Props = {
                 <p style={{ 
                     fontFamily: "'VT323', monospace",
                     color: 'black', 
+                    backgroundColor: '#EEF44D',
                     fontSize: '0.8rem', 
                     margin: '0',
                     marginTop: '1px',
