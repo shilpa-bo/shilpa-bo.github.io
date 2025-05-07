@@ -18,7 +18,7 @@ export default function PixelCanvas() {
     canvas.width = width;
     canvas.height = height;
 
-    // Optional: draw grid lines initially
+    // Draw grid lines initially
     for (let x = 0; x < width; x += cellSize) {
       for (let y = 0; y < height; y += cellSize) {
         ctx.strokeStyle = '#eee';
