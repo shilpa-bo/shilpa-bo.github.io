@@ -5,7 +5,10 @@ export default function ProjectsWindow({onMaximize, onMinimize, onClose }: { onM
   return (
     <WindowWrapper id="projects-window" title="Projects" onMaximize={onMaximize} onMinimize={onMinimize} onClose={onClose}>
         <div className="projects-wrapper">
-            <h1 className="projects-title">PROJECTS</h1>
+            <h1 className="projects-title"
+            style={{color: '#2E6374',}}>
+              In construction
+            </h1>
         </div>
     </WindowWrapper>
   );
