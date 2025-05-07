@@ -26,13 +26,15 @@ export default function PixelCanvas() {
       }
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = Math.floor((e.clientX - rect.left) / cellSize) * cellSize;
-      const y = Math.floor((e.clientY - rect.top) / cellSize) * cellSize;
+    const draw = (x: number, y: number) => {
+      ctx.fillStyle = '#EEF44D';
+      const gridX = Math.floor(x / cellSize) * cellSize;
+      const gridY = Math.floor(y / cellSize) * cellSize;
+      ctx.fillRect(gridX, gridY, cellSize, cellSize);
+    };
 
-      ctx.fillStyle = '#EEF44D'; // draw color
-      ctx.fillRect(x, y, cellSize, cellSize);
+    const handleMouseMove = (e: MouseEvent) => {
+      draw(e.clientX, e.clientY);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -50,8 +52,10 @@ export default function PixelCanvas() {
         position: 'fixed',
         top: 0,
         left: 0,
+        width: '100vw',
+        height: '100vh',
         zIndex: 0,
-        pointerEvents: 'none', // allows clicks through to your desktop
+        pointerEvents: 'none', // allows interaction with underlying UI
       }}
     />
   );
