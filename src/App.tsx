@@ -17,6 +17,8 @@ function App() {
     left: number;
     minimized: boolean;
     maximized: boolean;
+    width: number;
+    height: number;
   }
   const dateTime = useDateTime();
   const [openWindows, setOpenWindows] = useState<WindowEntry[]>([
@@ -26,7 +28,9 @@ function App() {
       top: 100,
       left: 500,
       minimized: false,
-      maximized: false
+      maximized: false,
+      width: 500,
+      height: 500
     },  
   ]);
   const [zCounter, setZCounter] = useState(0);
@@ -60,7 +64,9 @@ function App() {
           top: 100 + offset,
           left: 100 + offset,
           minimized: false,
-          maximized: false
+          maximized: false,
+          width: 700,
+          height: 500
         }
       ]);
       setZCounter(newZ);
@@ -73,9 +79,10 @@ function App() {
 
   const toggleMinimizeWindow = (windowName: string) => {
     console.log("toggleMinimizeWindow", windowName);
+
     setOpenWindows(current =>
       current.map(w =>
-        w.id === windowName ? { ...w, minimized: !w.minimized } : w
+        w.id === windowName ? { ...w, minimized: !w.minimized, maximized: false } : w
       )
     );
   };
@@ -86,6 +93,7 @@ function App() {
       current.map(w =>
         w.id === windowName ? { ...w, maximized: !w.maximized } : w
       )
+      //also disabled the maximized button here
     );
   }
   
@@ -116,15 +124,16 @@ function App() {
         <ImageIcon label="about me" onDoubleClick={() => handleOpenWindow('about-me')} top={280} left={45}/>
 
         {openWindows.map((win) => {
-          const offsetStyle = {
-            top: `${win.top}px`,
-            left:  `${win.left}px`,
-            position: 'absolute' as const,
-            zIndex: win.z,
-          };
-
-          // Only render the window if it's NOT minimized
-          if (win.minimized) return null; 
+            const offsetStyle = {
+                top: `${win.top}px`,
+                left: `${win.left}px`,
+                width: `${win.width}px`,
+                height: `${win.height}px`,
+                position: 'absolute' as const,
+                zIndex: win.z,
+              };
+        // Only render the window if it's NOT minimized
+        if (win.minimized) return null; 
 
           return (
             <div key={win.id} id={`${win.id}`} style={offsetStyle} onMouseDown={() => bringToFront(win.id)}>
